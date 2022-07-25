@@ -42,11 +42,11 @@ public class Space {
     }
 
     private void boxMustDeath(){
-        List<List<Box>> sizeRemove = new ArrayList<>(sizeX);
+        List<List<Box>> sizeChange = new ArrayList<>(sizeX);
         for (int i = 0; i < sizeX; i++) {
-            sizeRemove.set(i, new ArrayList<>(sizeY));
+            sizeChange.set(i, new ArrayList<>(sizeY));
             for (int j = 0; j < sizeY; j++) {
-                sizeRemove.get(i).add(new Box(i,j));
+                sizeChange.get(i).add(new Box(i,j));
             }
         }
         for (int i = 0; i < sizeX; i++) {
@@ -62,14 +62,14 @@ public class Space {
                     if(size.get(i).get(j-1).isLifeNow()) t++;
                     if(size.get(i).get(j+1).isLifeNow()) t++;
                     if(t!=3){
-                        sizeRemove.get(i).get(j).isLife();
+                        sizeChange.get(i).get(j).isLife();
                     }
                 }
             }
         }
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
-                if(sizeRemove.get(i).get(j).isLifeNow()){
+                if(sizeChange.get(i).get(j).isLifeNow()){
                     if(size.get(i).get(j).isLifeNow()){
                         size.get(i).add(new Box(i,j));
                     }
@@ -79,11 +79,11 @@ public class Space {
     }
 
     private void boxMustLife(){
-        List<List<Box>> sizeRemove = new ArrayList<>(sizeX);
+        List<List<Box>> sizeChange = new ArrayList<>(sizeX);
         for (int i = 0; i < sizeX; i++) {
-            sizeRemove.set(i, new ArrayList<>(sizeY));
+            sizeChange.set(i, new ArrayList<>(sizeY));
             for (int j = 0; j < sizeY; j++) {
-                sizeRemove.get(i).add(new Box(i,j));
+                sizeChange.get(i).add(new Box(i,j));
             }
         }
         for (int i = 0; i < sizeX; i++) {
@@ -99,14 +99,14 @@ public class Space {
                     if(size.get(i).get(j-1).isLifeNow()) t++;
                     if(size.get(i).get(j+1).isLifeNow()) t++;
                     if(t==3){
-                        sizeRemove.get(i).get(j).isLife();
+                        sizeChange.get(i).get(j).isLife();
                     }
                 }
             }
         }
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
-                if(sizeRemove.get(i).get(j).isLifeNow()){
+                if(sizeChange.get(i).get(j).isLifeNow()){
                     if(!size.get(i).get(j).isLifeNow()){
                         size.get(i).get(j).isLife();
                     }
