@@ -7,8 +7,8 @@ import java.util.Random;
 public class Space {
     private int sizeX;
     private int sizeY;
-    private List<List<Box>> size;
-    private int startCountBox;
+    private final List<List<Box>> size;
+    public int startCountBox;
 
     public void setStartCountBox(int startCountBox) {
         this.startCountBox = startCountBox;
@@ -34,14 +34,21 @@ public class Space {
         }
     }
 
-    public void burnBox(int numbersBox){
-        for (int i = 0; i < numbersBox; i++) {
+    public void burnBox(int startCountBox){
+        for (int i = 0; i < startCountBox; i++) {
             Random random = new Random();
             size.get(random.nextInt() % sizeX).get(random.nextInt()%sizeY).isLife();
         }
     }
 
     private void boxMustDeath(){
+        List<List<Box>> sizeRemove = new ArrayList<>(sizeX);
+        for (int i = 0; i < sizeX; i++) {
+            sizeRemove.set(i, new ArrayList<>(sizeY));
+            for (int j = 0; j < sizeY; j++) {
+                sizeRemove.get(i).add(new Box(i,j));
+            }
+        }
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
                 if(size.get(i).get(j).isLifeNow()){
@@ -54,7 +61,16 @@ public class Space {
                     if(size.get(i+1).get(j+1).isLifeNow()) t++;
                     if(size.get(i).get(j-1).isLifeNow()) t++;
                     if(size.get(i).get(j+1).isLifeNow()) t++;
-                    if(t<3){
+                    if(t!=3){
+                        sizeRemove.get(i).get(j).isLife();
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                if(sizeRemove.get(i).get(j).isLifeNow()){
+                    if(size.get(i).get(j).isLifeNow()){
                         size.get(i).add(new Box(i,j));
                     }
                 }
@@ -63,9 +79,16 @@ public class Space {
     }
 
     private void boxMustLife(){
+        List<List<Box>> sizeRemove = new ArrayList<>(sizeX);
+        for (int i = 0; i < sizeX; i++) {
+            sizeRemove.set(i, new ArrayList<>(sizeY));
+            for (int j = 0; j < sizeY; j++) {
+                sizeRemove.get(i).add(new Box(i,j));
+            }
+        }
         for (int i = 0; i < sizeX; i++) {
             for (int j = 0; j < sizeY; j++) {
-                if(size.get(i).get(j).isLifeNow()==false){
+                if(!size.get(i).get(j).isLifeNow()){
                     int t = 0;
                     if(size.get(i-1).get(j).isLifeNow()) t++;
                     if(size.get(i-1).get(j-1).isLifeNow()) t++;
@@ -75,7 +98,16 @@ public class Space {
                     if(size.get(i+1).get(j+1).isLifeNow()) t++;
                     if(size.get(i).get(j-1).isLifeNow()) t++;
                     if(size.get(i).get(j+1).isLifeNow()) t++;
-                    if(t>=3){
+                    if(t==3){
+                        sizeRemove.get(i).get(j).isLife();
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                if(sizeRemove.get(i).get(j).isLifeNow()){
+                    if(!size.get(i).get(j).isLifeNow()){
                         size.get(i).get(j).isLife();
                     }
                 }
