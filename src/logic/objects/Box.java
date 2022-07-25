@@ -3,7 +3,7 @@ package logic.objects;
 public class Box {
     private int x;
     private int y;
-
+    private boolean life;
     public int getX() {
         return x;
     }
@@ -20,8 +20,21 @@ public class Box {
         this.y = y;
     }
 
+    public void setLife(boolean life) {
+        this.life = life;
+    }
+
     public Box(int x, int y) {
         this.x = x;
         this.y = y;
+        this.life = false;
+    }
+
+    public void isLife (){
+        boolean life = true;
+    }
+
+    public boolean isLifeNow(){
+        return life;
     }
 }
