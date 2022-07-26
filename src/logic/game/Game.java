@@ -1,9 +1,6 @@
 package logic.game;
 
-import logic.objects.Box;
 import logic.objects.Space;
-
-import java.util.Random;
 
 public class Game {
     private Space gameSpace;

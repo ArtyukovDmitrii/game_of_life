@@ -5,21 +5,13 @@ import java.util.List;
 import java.util.Random;
 
 public class Space {
-    private int sizeX;
-    private int sizeY;
+    private final int sizeX;
+    private final int sizeY;
     private final List<List<Box>> size;
     public int startCountBox;
 
     public void setStartCountBox(int startCountBox) {
         this.startCountBox = startCountBox;
-    }
-
-    public void setSizeX(int sizeX) {
-        this.sizeX = sizeX;
-    }
-
-    public void setSizeY(int sizeY) {
-        this.sizeY = sizeY;
     }
 
     public Space(int sizeX, int sizeY) {
@@ -29,7 +21,7 @@ public class Space {
         for (int i = 0; i < sizeX; i++) {
             size.add(new ArrayList<>(sizeY));
             for (int j = 0; j < sizeY; j++) {
-                size.get(i).add(new Box(i, j));
+                size.get(i).add(new Box());
             }
         }
     }
@@ -60,7 +52,7 @@ public class Space {
         for (int i = 0; i < sizeX; i++) {
             sizeChange.add(new ArrayList<>(sizeY));
             for (int j = 0; j < sizeY; j++) {
-                sizeChange.get(i).add(new Box(i, j));
+                sizeChange.get(i).add(new Box());
             }
         }
         for (int i = 0; i < sizeX; i++) {
@@ -80,7 +72,7 @@ public class Space {
             for (int j = 0; j < sizeY; j++) {
                 if (sizeChange.get(i).get(j).isLifeNow()) {
                     if (size.get(i).get(j).isLifeNow()) {
-                        size.get(i).set(j, new Box(i, j));
+                        size.get(i).set(j, new Box());
                     } else {
                         size.get(i).get(j).isLife();
                     }
