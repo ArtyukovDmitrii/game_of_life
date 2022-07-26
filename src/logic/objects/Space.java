@@ -81,12 +81,23 @@ public class Space {
                 if (sizeChange.get(i).get(j).isLifeNow()) {
                     if (size.get(i).get(j).isLifeNow()) {
                         size.get(i).set(j, new Box(i, j));
-                    }else {
+                    } else {
                         size.get(i).get(j).isLife();
                     }
                 }
             }
         }
+    }
+
+    public boolean GameOver() {
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeY; j++) {
+                if (size.get(i).get(j).isLifeNow()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }
