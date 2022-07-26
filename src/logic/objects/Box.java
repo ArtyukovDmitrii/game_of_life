@@ -31,7 +31,7 @@ public class Box {
     }
 
     public void isLife (){
-        boolean life = true;
+        life = true;
     }
 
     public boolean isLifeNow(){
